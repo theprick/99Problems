@@ -337,7 +337,7 @@ class S99ListTestSuite extends FunSuite {
   }
 
   test("'randomPermute' on some list") {
-    val list = List('a, 'b, 'c, 'd, 'e, 'f)
+    val list = List('a, 'b, 'c, 'd, 'e, 'f, 'g)
     val result = randomPermute(list)
 
     assert(list.size === result.size)
