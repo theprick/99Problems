@@ -4,7 +4,7 @@ import arithmetic.S99Int._
 import org.scalatest.FunSuite
 
 /**
- * Created by Adrian on 13.04.2014.
+ * This file was created by Popescu Adrian-Dumitru on 13.04.2014.
  */
 class S99IntTestSuite extends FunSuite {
   test("7 is prime") {
@@ -49,5 +49,9 @@ class S99IntTestSuite extends FunSuite {
 
   test("totient of 10 is 4") {
     assert(10.totient === 4)
+  }
+
+  test("primeFactors of 315") {
+    assert(315.primeFactors === List(3, 3, 5, 7))
   }
 }

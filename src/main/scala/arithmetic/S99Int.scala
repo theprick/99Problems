@@ -11,7 +11,8 @@ class S99Int(val value: Int) {
    * http://en.wikipedia.org/wiki/Primality_test
    */
   def isPrime: Boolean =
-    (value > 1) && (Stream.cons(2, Stream.from(3, 2)) takeWhile (_ <= Math.sqrt(value)) forall (value % _ > 0))
+    (value > 1) && (primes takeWhile (_ <= Math.sqrt(value)) forall (value % _ > 0))
+//    (value > 1) && (Stream.cons(2, Stream.from(3, 2)) takeWhile (_ <= Math.sqrt(value)) forall (value % _ > 0))
 
 
   /**
@@ -28,6 +29,19 @@ class S99Int(val value: Int) {
    */
   def totient: Int = Stream.from(1) takeWhile (_ <= value) count isComprimeTo
   //(1 to start) filter { start.isCoprimeTo(_) } length
+
+  /**
+   * P35 (**) Determine the prime factors of a given positive integer.
+   * Construct a flat list containing the prime factors in ascending order.
+   */
+  def primeFactors: List[Int] = {
+    def primeFactors(value: Int, factors: List[Int]): List[Int] =
+      primes find (value % _ == 0) match {
+        case None     => factors
+        case Some(factor)  => primeFactors(value / factor, factors ++ List(factor))
+      }
+    primeFactors(value, List[Int]())
+  }
 }
 
 object S99Int {
@@ -37,7 +51,7 @@ object S99Int {
 
   def apply(i: Int) = new S99Int(i)
 
-  val primes = Stream.cons(2, Stream(3, 2)) filter (_.isPrime)
+  val primes = Stream.cons(2, Stream.from(3, 2) filter (_.isPrime))
 
   /**
    * P32 (**) Determine the greatest common divisor of two positive integer numbers.
